@@ -18,7 +18,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.models.lead import Lead, LeadState
+from app.models.lead import Lead
 from app.models.admin_user import AdminUser
 from app.db.db import Base
 target_metadata = Base.metadata

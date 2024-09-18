@@ -9,6 +9,11 @@ class Settings(BaseSettings):
     mysql_db: str
     secret_key: str
     algorithm: str
+    smtp_server: str
+    smtp_port: int
+    smtp_username: str
+    smtp_password: str
+    from_email: str
 
     model_config = SettingsConfigDict(env_file='.env')
     

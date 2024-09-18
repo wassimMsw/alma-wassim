@@ -42,6 +42,7 @@ async def create_user(
     _: Annotated[AdminUser, Depends(get_current_active_user)],
     db: Annotated[Session, Depends(get_db)],
     username: str,
+    email: str,
     password: str,
 ):
     user = get_admin_user(db, username)
@@ -51,7 +52,7 @@ async def create_user(
             detail="User already exists",
         )
     hashed_password = get_password_hash(password)
-    user = AdminUserInDB(username=username, hashed_password=hashed_password)
+    user = AdminUserInDB(username=username, hashed_password=hashed_password, email=email)
     user = create_admin_user(db, user)
     if user is None:
         raise HTTPException(

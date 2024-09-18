@@ -9,12 +9,6 @@ class LeadStateEnum(Enum):
     REACHED_OUT = "REACHED_OUT"
 
 
-class LeadState(Base):
-    __tablename__ = "lead_states"
-
-    name = Column(String(255), primary_key=True)
-
-
 class Lead(Base):
     __tablename__ = "leads"
 
@@ -23,7 +17,7 @@ class Lead(Base):
     last_name = Column(String(255), index=True)
     email = Column(String(255), index=True)
     resume_id = Column(Integer, ForeignKey("resumes.id"))
-    state = Column(String(255), ForeignKey("lead_states.name"), default=LeadStateEnum.PENDING.value)
+    state = Column(String(255), default=LeadStateEnum.PENDING.value)
 
 class Resume(Base):
     __tablename__ = "resumes"

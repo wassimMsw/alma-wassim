@@ -10,18 +10,15 @@ def generate_random_password(length=12):
     characters = string.ascii_letters + string.digits + string.punctuation
     return ''.join(random.choice(characters) for _ in range(length))
 
-def create_user(username: str, db: Session):
-    password = generate_random_password()
-    hashed_password = get_password_hash(password)
-    user = AdminUserInDB(username=username, hashed_password=hashed_password)
-    user = create_admin_user(db,user)
-    return user, password
-
 def main():
     db = SessionLocal()
+    username = input("Enter username: ")
+    password = input("Enter password: ")
+    email = input("Enter email: ")
+    hashed_password = get_password_hash(password)
+    user = AdminUserInDB(username=username, hashed_password=hashed_password, email=email)
     try:
-        username = "new_user"
-        user, password = create_user(username, db)
+        user = create_admin_user(db, user)
         print(f"User created: {user.username}")
         print(f"Password: {password}")
     finally:

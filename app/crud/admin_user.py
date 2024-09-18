@@ -12,3 +12,6 @@ def create_admin_user(db: Session, admin_user: AdminUserInDB):
     db.commit()
     db.refresh(db_admin_user)
     return db_admin_user
+
+def get_admin_users(db: Session):
+    return db.query(AdminUserModel).filter(AdminUserModel.disabled == False).all()
