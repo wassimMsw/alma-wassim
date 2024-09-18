@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app.models.lead import Lead
-from app.schemas.lead import LeadCreate
+from app.models.lead import Lead, Resume
+from app.schemas.lead import LeadCreate, ResumeCreate
 
 def get_leads(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Lead).offset(skip).limit(limit).all()
@@ -19,3 +19,13 @@ def update_lead_state(db: Session, lead_id: int, state: str):
     db.commit()
     db.refresh(db_lead)
     return db_lead
+
+def create_resume(db: Session, resume: ResumeCreate):
+    db_resume = Resume(**resume.model_dump())
+    db.add(db_resume)
+    db.commit()
+    db.refresh(db_resume)
+    return db_resume
+
+def get_resume(db: Session, resume_id: int):
+    return db.query(Resume).filter(Resume.id == resume_id).first()

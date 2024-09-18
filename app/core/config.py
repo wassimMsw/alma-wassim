@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     mysql_host: str
     mysql_port: int
     mysql_db: str
+    secret_key: str
+    algorithm: str
 
     model_config = SettingsConfigDict(env_file='.env')
     

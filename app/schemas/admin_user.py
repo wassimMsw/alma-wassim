@@ -1,6 +1,10 @@
 from pydantic import BaseModel
 
-    
+
 class AdminUser(BaseModel):
-    email: str
-    password: str
+    username: str
+    disabled: bool | None = None
+
+
+class AdminUserInDB(AdminUser):
+    hashed_password: str
